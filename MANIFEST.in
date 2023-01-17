@@ -1,0 +1,6 @@
+include ChangeLog.md
+include LICENSE.md
+include README.md
+
+
+recursive-include products_data *

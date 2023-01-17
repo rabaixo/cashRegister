@@ -11,5 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - define the package structure
+- define pricing rules
+- define the product class
+
+
+
+
 
 
