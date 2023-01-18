@@ -10,14 +10,6 @@ def readme():
         return f.read()
 
 
-# LICENSE file
-# ============
-def license():
-    """License file."""
-    with open("LICENSE") as f:
-        return f.read()
-
-
 # requirements.txt file
 # =====================
 def requirements():
@@ -47,11 +39,15 @@ setup(
     packages=find_packages(),
     install_requires=requirements(),
     include_package_data=True,
-    license=license(),
     dependency_links=dependency_links,
     entry_points={
         "console_scripts": [
+            "scan_clothes=cashRegister.main:main"
 
         ]
     },
 )
+
+
+
+

@@ -6,13 +6,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+
+
+## [0.0.1] - 2023-01-18
+
+### Added
+
+- Define the main module
+
 ## [0.0.1] - 2023-01-17
 
 ### Added
 
-- define the package structure
-- define pricing rules
-- define the product class
+- Define the package structure
+- Define pricing rules
+- Define the product class
+
+
 
 
 
