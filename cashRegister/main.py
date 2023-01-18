@@ -1,13 +1,11 @@
 # python packages
 import argparse
-import logging as log
 import sys
-import pickle
 import pkg_resources
-import os
 
 # package modules
-
+from . import pricing_rules as pr
+from . import checkout as co
 
 
 # parse_args ------------------------------------------------------------------
@@ -42,11 +40,7 @@ def parse_args():
     args = parser.parse_args()
 
     return args
-
-
 # --------------------------------------------------------------------------- #
-
-
 # main ------------------------------------------------------------------------
 def main():
     """Read data using argparse_ package and execute the
@@ -58,7 +52,7 @@ def main():
     # Load input
     # -------------------------------------------------------------------------
     args = parse_args()
-    products_file = args.products_list
+    products_list = args.products_list
     version = args.version
 
 
@@ -70,9 +64,14 @@ def main():
         print(package_info.version)
         sys.exit(0)
 
-    if args.products_file is None:
+    if args.products_list is None:
         sys.exit("No items to scan.")
 
+
+    checkout_obj = co.Checkout(pr.pricing_rules)
+    for product in products_list:
+        items = checkout_obj.scan(product)
+        print(items)
 
 
 

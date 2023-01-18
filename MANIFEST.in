@@ -3,4 +3,4 @@ include LICENSE.md
 include README.md
 
 
-recursive-include products_data *
+recursive-include cashRegister/products_data *

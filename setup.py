@@ -43,7 +43,6 @@ setup(
     entry_points={
         "console_scripts": [
             "scan_clothes=cashRegister.main:main"
-
         ]
     },
 )

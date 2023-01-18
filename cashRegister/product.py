@@ -1,9 +1,10 @@
 import os
 import yaml
 import cashRegister
+import jmespath
 
-class product:
-    def _init_(code):
+class Product:
+    def __init__(self, code):
         """ Save all information about a scanned product
 
         Args:
@@ -32,10 +33,10 @@ class product:
         Returns:
             dict: the dictionary of the information of the product (code, name, price)
         """
-        products_yaml = os.path.join(cashRegister.__path__[0], "products.yaml",)
+        products_yaml = os.path.join(cashRegister.__path__[0], "products_data","products.yaml",)
         with open(products_yaml) as file:
-            products_dict = yaml.load(file, Loader=yaml.FullLoader)
-        product = products_dict[code]
+            products_list = yaml.load(file, Loader=yaml.FullLoader)
+        product = jmespath.search(f"[?CODE == '{code}']", products_list)[0]
         return product
 
     def add_item(self):
@@ -48,7 +49,12 @@ class product:
         """
         self.ITEMS -= 1
 
+    def __repr__(self):
+        """product representation
 
-
+        Returns:
+            str: product representation
+        """
+        return self.CODE
 
 
