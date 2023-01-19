@@ -6,12 +6,17 @@ class Checkout:
 
         Args:
             pricing_rules (dict): pricing rules
+
+        Attributes:
+            pricing_rules (dict):  pricing rules
+            items_list (list): the list of items
+            objs_products_dict (dict): dict of the products objects
         """
         self.pricing_rules = pricing_rules
         self.items_list = []
-        self.objs_products_list = []
+        self.objs_products_dict = {}
 
-
+        # unknown product code
     def scan(self, code):
         """Scan item from an product
 
@@ -21,16 +26,19 @@ class Checkout:
         Returns:
             dict: items & total
         """
-        self.items_list.append(code)
-        codes_products_list = [object_product.CODE for object_product in self.objs_products_list]
-        if code in codes_products_list:
-            self.objs_products_list[codes_products_list.index(code)].add_item()
+        if code in self.objs_products_dict:
+            self.objs_products_dict[code].add_item()
         else:
-            self.objs_products_list.append(pr.Product(code))
+            try:
+                self.objs_products_dict[code] = pr.Product(code)
+            except Exception as err:
+                return {"error": err}
+
+        self.items_list.append(code)
         total = self.get_total()
         return {"items": self.items_list, "total": total}
 
-    def remove_item(self, code):
+    def remove(self, code):
         """ Remove item from an product
 
         Args:
@@ -39,7 +47,16 @@ class Checkout:
         Returns:
             dict: items & total
         """
-        pass
+        if code in self.objs_products_dict:
+            self.objs_products_dict[code].remove_item()
+            total = self.get_total()
+            self.items_list.remove(code)
+            if self.objs_products_dict[code].ITEMS == 0:
+                del self.objs_products_dict[code]
+            return {"items": self.items_list, "total": total}
+        else:
+            return {"warning": f'"{code}" not registered.'}
+
 
 
     def get_total(self):
@@ -48,12 +65,12 @@ class Checkout:
         Returns:
             double: the items total
         """
-        for obj_product in self.objs_products_list:
+        for obj_product in self.objs_products_dict.values():
             if obj_product.CODE in self.pricing_rules:
                 obj_product.TOTAL = self.pricing_rules[obj_product.CODE](obj_product)
             else:
                 obj_product.TOTAL = obj_product.ITEMS * obj_product.PRICE
-        return sum([obj_product.TOTAL for obj_product in self.objs_products_list])
+        return sum([obj_product.TOTAL for obj_product in self.objs_products_dict.values()])
 
 
 

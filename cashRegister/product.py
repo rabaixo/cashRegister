@@ -36,7 +36,11 @@ class Product:
         products_yaml = os.path.join(cashRegister.__path__[0], "products_data","products.yaml",)
         with open(products_yaml) as file:
             products_list = yaml.load(file, Loader=yaml.FullLoader)
-        product = jmespath.search(f"[?CODE == '{code}']", products_list)[0]
+        try:
+            product = jmespath.search(f"[?CODE == '{code}']", products_list)[0]
+        except IndexError:
+            raise ValueError(f'Product code "{code}" not available.')
+
         return product
 
     def add_item(self):

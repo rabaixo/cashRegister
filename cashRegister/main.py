@@ -71,9 +71,12 @@ def main():
     checkout_obj = co.Checkout(pr.pricing_rules)
     for product in products_list:
         items = checkout_obj.scan(product)
-        print(items)
-
-
+        if "error" in items:
+            print(f'Error: {items["error"]}')
+        elif "error" in items:
+            print('Warning: {items["warning"]}')
+        else:
+            print("Items: "+", ".join(items["items"])+ f" - Total:{items['total']}")
 
 
 if __name__ == "__main__":
