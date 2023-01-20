@@ -23,26 +23,6 @@ class Product:
         self.ITEMS = 1
         self.TOTAL = 0
 
-
-    def get_product(self, code):
-        """Get the product from the yaml (DDBB)
-
-        Args:
-            code (str): product code
-
-        Returns:
-            dict: the dictionary of the information of the product (code, name, price)
-        """
-        products_yaml = os.path.join(cashRegister.__path__[0], "products_data","products.yaml",)
-        with open(products_yaml) as file:
-            products_list = yaml.load(file, Loader=yaml.FullLoader)
-        try:
-            product = jmespath.search(f"[?CODE == '{code}']", products_list)[0]
-        except IndexError:
-            raise ValueError(f'Product code "{code}" not available.')
-
-        return product
-
     def add_item(self):
         """Add item
         """
@@ -60,5 +40,27 @@ class Product:
             str: product representation
         """
         return self.CODE
+
+
+    @staticmethod
+    def get_product(code):
+        """Get the product from the yaml (DDBB)
+
+        Args:
+            code (str): product code
+
+        Returns:
+            dict: the dictionary of the information of the product (code, name, price)
+        """
+        products_yaml = os.path.join(cashRegister.__path__[0], "products_data","products.yaml",)
+        with open(products_yaml) as file:
+            products_list = yaml.load(file, Loader=yaml.FullLoader)
+
+        try:
+            product = jmespath.search(f"[?CODE == '{code}']", products_list)[0]
+        except IndexError:
+            raise ValueError(f'Product code "{code}" not available.')
+
+        return product
 
 
