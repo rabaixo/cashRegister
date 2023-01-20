@@ -32,7 +32,7 @@ class Checkout:
             try:
                 self.objs_products_dict[code] = pr.Product(code)
             except Exception as err:
-                return {"error": err}
+                return {"error": err.__str__()}
 
         self.items_list.append(code)
         total = self.get_total()
