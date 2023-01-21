@@ -1,4 +1,4 @@
-parameters_to_test_list=[
+parameters_list_to_test = [
     (["VOUCHER"], 5),
     (["VOUCHER", "VOUCHER"], 5.00),
     (["TSHIRT", "TSHIRT"], 40.00),
@@ -11,7 +11,19 @@ parameters_to_test_list=[
     (["VOUCHER", "TSHIRT", "VOUCHER", "VOUCHER", "PANTS", "TSHIRT", "TSHIRT"], 74.5)
 ]
 
-parameters_to_test_error_list = [
+parameters_list_to_test_error = [
     ("LILLE"),
     ("SMALL")
+]
+
+parameters_list_to_test_remove = [
+    (["VOUCHER", "TSHIRT", "VOUCHER", "VOUCHER", "PANTS", "TSHIRT", "TSHIRT"] , "VOUCHER", ["TSHIRT", "VOUCHER", "VOUCHER", "PANTS", "TSHIRT", "TSHIRT"], 69.5),
+    (["TSHIRT", "TSHIRT", "TSHIRT", "VOUCHER", "TSHIRT"], "TSHIRT", ["TSHIRT", "TSHIRT", "VOUCHER", "TSHIRT"], 62),
+    (["TSHIRT", "TSHIRT", "VOUCHER", "TSHIRT"] , "TSHIRT", ["TSHIRT", "VOUCHER", "TSHIRT"], 45.00),
+]
+
+
+parameters_list_to_test_warning = [
+    (["TSHIRT", "TSHIRT", "VOUCHER", "TSHIRT"], "PANTS"),
+    (["TSHIRT", "PANTS", "TSHIRT"], "VOUCHER"),
 ]
