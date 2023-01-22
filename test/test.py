@@ -16,7 +16,7 @@ def test_price_rules(items, total_expected_cost):
     """Test the behavior of price rules
 
     Args:
-        items (list): list of products code
+        items (list): list of the products codes
         total_expected_cost (double): total expected cost
     """
     checkout_obj = checkout.Checkout(pricing_rules.pricing_rules)
@@ -47,11 +47,11 @@ def test_error(item):
 )
 def test_remove_element(items, item_to_remove, item_list_updated, total_expected_cost):
     """ The list and the value of the total cost must be updated
-        When a product is deleted from the list of items
+        when a product is deleted from the list of items
     Args:
-        items (list): list of products codes
+        items (list): list of the products codes
         item_to_remove (str): item to remove
-        item_list_updated (list): updated list of products codes
+        item_list_updated (list): updated list of the products codes
         total_expected_cost (double): total expected cost
     """
     checkout_obj = checkout.Checkout(pricing_rules.pricing_rules)
@@ -71,7 +71,7 @@ def test_warning(item_to_scan, item_to_remove):
         to delete an unregistered element (for Django web app)
 
     Args:
-        item_to_scan (list): item to scan
+        item_to_scan (list): list of the products codes to scan
         item_to_remove (str): item to remove
     """
     checkout_obj = checkout.Checkout(pricing_rules.pricing_rules)

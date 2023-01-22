@@ -1,30 +1,30 @@
+# package modules
 from . import product as pr
 
 class Checkout:
     def __init__(self, pricing_rules):
-        """Scan or remove an product items
+        """Scan or remove the items of store products
 
         Args:
             pricing_rules (dict): pricing rules
 
         Attributes:
             pricing_rules (dict):  pricing rules
-            items_list (list): the list of items
-            objs_products_dict (dict): dict of the products objects
+            items_list (list): the list of scanned items
+            objs_products_dict (dict): dict of the scanned products objects
         """
         self.pricing_rules = pricing_rules
         self.items_list = []
         self.objs_products_dict = {}
 
-        # unknown product code
     def scan(self, code):
-        """Scan item from an product
+        """Scan an item of a product
 
         Args:
             code (str): the code of product
 
         Returns:
-            dict: items & total
+            dict: scanned items & the total cost (items, total) or error (error)
         """
         if code in self.objs_products_dict:
             self.objs_products_dict[code].add_item()
@@ -39,13 +39,13 @@ class Checkout:
         return {"items": self.items_list, "total": total}
 
     def remove(self, code):
-        """ Remove item from an product
+        """ Remove an item of a product from the scanned products list
 
         Args:
             code (str): the code of product
 
         Returns:
-            dict: items & total
+            dict: scanned items without the deleted item & the updated total cost (items, total) or warning (warning)
         """
         if code in self.objs_products_dict:
             self.objs_products_dict[code].remove_item()
@@ -60,10 +60,10 @@ class Checkout:
 
 
     def get_total(self):
-        """ Get the total of all items
+        """ Get the total cost of all scanned items
 
         Returns:
-            double: the items total
+            double: the items total cost
         """
         for obj_product in self.objs_products_dict.values():
             if obj_product.CODE in self.pricing_rules:

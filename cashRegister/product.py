@@ -1,7 +1,10 @@
+# python packages
 import os
 import yaml
-import cashRegister
 import jmespath
+
+# package modules
+import cashRegister
 
 class Product:
     def __init__(self, code):
@@ -14,8 +17,8 @@ class Product:
             CODE (str): product code
             NAME (str): product name
             PRICE (double): price of one item of product
-            ITEMS (int): number of the items of the product
-            TOTAL (double): Total price of the sum items of the product
+            ITEMS (int): number of the scanned items of the product
+            TOTAL (double): total price of the sum items of the product
         """
         product_dict = self.get_product(code)
         for k,v in product_dict.items():
@@ -34,7 +37,7 @@ class Product:
         self.ITEMS -= 1
 
     def __repr__(self):
-        """product representation
+        """Product representation
 
         Returns:
             str: product representation
@@ -50,7 +53,7 @@ class Product:
             code (str): product code
 
         Returns:
-            dict: the dictionary of the information of the product (code, name, price)
+            dict: the dictionary of the information of the product (CODE, NAME, PRICE)
         """
         products_yaml = os.path.join(cashRegister.__path__[0], "products_data","products.yaml",)
         with open(products_yaml) as file:
