@@ -1,7 +1,7 @@
 =======
 
 # Introduction
-This package simulates a store cash register. Its main functions are: to scan the elements of the products in the store and return the total cost and delete one element or more registred and return the update total cost. The items can be scanned or deleted in any order.
+This package simulates a store cash register. Its main functions are: to scan the elements of the products in the store and return the total cost and also the option to delete if we want to eliminate one o more of the elements that we have already scanned.
 The three products of the store are the following:
 
 1. CODE: VOUCHER, NAME: Gift Card, PRICE: 5.00€
