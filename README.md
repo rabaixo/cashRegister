@@ -32,6 +32,7 @@ Dependencies:
 
 1.	jmespath
 2.	pytest
+3.  PyYAML
 
 ## How to run
 To launch the package you must execute the following command:
